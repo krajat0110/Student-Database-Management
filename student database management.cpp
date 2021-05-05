@@ -21,7 +21,7 @@ public:
    int getIDNum() const;
 };
 
-void Student:: calculate()
+void student::calculate()
 {
   per=(cpp+cloud_computing+drone+hpc+evs)/5.0;
   if(per>=90)
@@ -63,18 +63,19 @@ cin»evs;
 calculate(); 
 } 
 
-void student showdata() const
+void student::showdata() const
 {
-  cout<<"\n ID Number: " <<idnum;
+  cout<<"\nID Number: " <<idnum;
   cout<<"\nName: "<<name;
   cout<<"\nCPP: "<<cpp;
   cout<<"\ncloud_computing: "<<cloud_computing;
   cout<<"\ndrone: "<<drone;
-  cout<<"\nHigh Performance computing:"<<hpc;
+  cout<<"\nHigh Performance computing: "<<hpc;
   cout<<"\nEnvironmental studies: "<<evs;
   cout<<"\nPercentage: "<<per;
   cout<<"\nLetter Grade: "<<grade;
 }
+
 Void student::show_tabular() const
 {
   cout<<idnum<<setw(6)<<" "<<name<<setw(10)<<cpp<<setw(4)<<cloud_computing<<setw(4)<<drone<<setw(4)<<hpc<<setw(4)<<evs<<setw(8)<<per<<setw(6)<<grade<<endl;
@@ -95,7 +96,7 @@ void DisplayResult();
 void write_student()
 {
   student st;
-  ofstream outfile;
+  ofstream outFile;
   outfile.open("student.dat",ios::binary|ios::app);
   st.getdate();
   outFile.write(reinterpret_cast<char *> (&st), sizeof(student));
@@ -107,7 +108,7 @@ void write_student()
 
 void display_all()
 {
-  student stl;
+  student st;
   ifstream inFiles;
   inFile.open("student.dat",ios::binary);
   if(!inFile)
@@ -118,7 +119,7 @@ void display_all()
     return;
   }
   cout<<"\n\n\n\tDISPLAY ALL RECORD !!\n\n"
-  while(inFile.read(reintrperet_cast<char *>(&st),sizeof(student)))
+  while(inFile.read(reinterpret_cast<char *>(&st),sizeof(student)))
   {
     st.showdata();
     cout<<"\n\n============================\n";
@@ -142,10 +143,10 @@ void display_all()
     }
 
     bool flag=false;
-    while(inFile,read(reinterpret_cast<char*>(&st),sizeof(student)))
+    while(inFile.read(reinterpret_cast<char*>(&st),sizeof(student)))
     {
-      if(st,getIDNum()==n){
-        dt.showdata();
+      if(st.getIDNum()==n){
+        st.showdata();
         flag=true;
       }
     }
@@ -161,7 +162,7 @@ void modify_student(int n)
   bool found=false;
   student st;
   fstream File;
-  File.opem("student.dat",ios::binary|ios::in|ios::out);
+  File.open("student.dat",ios::binary|ios::in|ios::out);
   if(!file)
   {
     cout<<"File could not be open !! press any key...";
@@ -172,7 +173,7 @@ void modify_student(int n)
   while(!file.eof() && found==false)
   {
     File.read(reinterpret_cast<char*>(&st), sizeof(student));
-    if(st,getIDNum()==n)
+    if(st.getIDNum()==n)
     {
       st.showdata();
       cout<<"\n\nPlease  Enter The New Details of student"<<Endl;
@@ -205,7 +206,7 @@ void delete_student(int n)
   }
   ofstream outFile;
   outFile.open("Temp.dat",ios::out);
-  inFiel.seekg(0,ios::beg);
+  inFile.seekg(0,ios::beg);
   while(inFile.read(reinterpret_cast<char *> (&st),sizeof(student)))
   {
     if(st.getIDNum()!=n)
