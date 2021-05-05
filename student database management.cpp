@@ -45,21 +45,21 @@ void student::calculate()
 }
 void student::getdata()
 {
-cout«"\nEnter The ID number of the student "; 
+cout<<"\n Enter The ID number of the student ";
 cin>>idnum; 
 cout<<"\n\nEnter student's Name: ";
 cin.ignore(); 
 cin.getline(name,50);
-cout«"\nEnter student's CPP grade: "; 
-cin»cpp;
+cout<<"\nEnter student's CPP grade: "; 
+cin>>cpp;
 cout<<"\nEnter student's Cloud computing grade: "; 
-cin»cloud_computing; 
-cout«"\nEnter student's Drone grade: ";
-cin»drone;
-cout«"\nEnter student's High Performance Computing grade: ";
-cin»hpc;
-cout«"\nEnter student's Environmental studies grade: "; 
-cin»evs; 
+cin>>cloud_computing; 
+cout<<"\nEnter student's Drone grade: ";
+cin>>drone;
+cout<<"\nEnter student's High Performance Computing grade: ";
+cin>>hpc;
+cout<<"\nEnter student's Environmental studies grade: "; 
+cin>>evs; 
 calculate(); 
 } 
 
@@ -76,7 +76,7 @@ void student::showdata() const
   cout<<"\nLetter Grade: "<<grade;
 }
 
-Void student::show_tabular() const
+void student::show_tabular() const
 {
   cout<<idnum<<setw(6)<<" "<<name<<setw(10)<<cpp<<setw(4)<<cloud_computing<<setw(4)<<drone<<setw(4)<<hpc<<setw(4)<<evs<<setw(8)<<per<<setw(6)<<grade<<endl;
 }
@@ -97,8 +97,8 @@ void write_student()
 {
   student st;
   ofstream outFile;
-  outfile.open("student.dat",ios::binary|ios::app);
-  st.getdate();
+  outFile.open("student.dat",ios::binary|ios::app);
+  st.getdata();
   outFile.write(reinterpret_cast<char *> (&st), sizeof(student));
   outFile.close();
   cout<<"\n\nStudent record has been Created ";
@@ -109,7 +109,7 @@ void write_student()
 void display_all()
 {
   student st;
-  ifstream inFiles;
+  ifstream inFile;
   inFile.open("student.dat",ios::binary);
   if(!inFile)
   {
@@ -118,7 +118,8 @@ void display_all()
     cin.get();
     return;
   }
-  cout<<"\n\n\n\tDISPLAY ALL RECORD !!\n\n"
+
+  cout<<"\n\n\n\tDISPLAY ALL RECORD !!\n\n";
   while(inFile.read(reinterpret_cast<char *>(&st),sizeof(student)))
   {
     st.showdata();
@@ -137,7 +138,7 @@ void display_all()
     if(!inFile)
     {
       cout<<"File could not be open !! press any key...";
-      cin.ignore;
+      cin.ignore();
       cin.get();
       return;
     }
@@ -150,7 +151,7 @@ void display_all()
         flag=true;
       }
     }
-    infile.close();
+    inFile.close();
     if(flag==false)
     cout<<"\n\nrecord not exist";
     cin.ignore();
@@ -163,25 +164,25 @@ void modify_student(int n)
   student st;
   fstream File;
   File.open("student.dat",ios::binary|ios::in|ios::out);
-  if(!file)
+  if(!File)
   {
     cout<<"File could not be open !! press any key...";
     cin.ignore();
     cin.get();
     return;
   }
-  while(!file.eof() && found==false)
+  while(!File.eof() && found==false)
   {
     File.read(reinterpret_cast<char*>(&st), sizeof(student));
     if(st.getIDNum()==n)
     {
       st.showdata();
-      cout<<"\n\nPlease  Enter The New Details of student"<<Endl;
+      cout<<"\n\nPlease  Enter The New Details of student"<<endl;
       st.getdata();
       int pos=(-1)*static_cast<int>(sizeof(st));
-      File.seek(pos,ios::cur);
+      File.seekp(pos,ios::cur);
       File.write(reinterpret_cast<char *>(&st),sizeof(student));
-      ccout<<"\n\n\t Record Updated";
+      cout<<"\n\n\t Record Updated";
       found=true;
     }
   }
@@ -199,7 +200,7 @@ void delete_student(int n)
   ifstream inFile;
   inFile.open("student.dat",ios::binary);
   if(!inFile){
-    cout<<"File could not be open !! press any key..."
+    cout<<"File could not be open !! press any key...";
     cin.ignore();
     cin.get();
     return;
@@ -211,7 +212,7 @@ void delete_student(int n)
   {
     if(st.getIDNum()!=n)
     {
-      outfile.write(reinterpret_cast<char *>(&st), sizeof(student));
+      outFile.write(reinterpret_cast<char *>(&st), sizeof(student));
     }
   }
   outFile.close();
@@ -245,15 +246,15 @@ void class_result()
   }
   cin.ignore();
   cin.get();
-  infile.close();
+  inFile.close();
 }
 
 int main() 
 {
- char chl
+ char ch;
  int num;
- cout.setf(ios::Fixed|ios::showpoint);
- cout<<setprecosion(2);
+ cout.setf(ios::fixed|ios::showpoint);
+ cout<<setprecision(2);
  do
  {
    cout<<"\n\n";
